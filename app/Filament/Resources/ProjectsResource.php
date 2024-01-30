@@ -23,7 +23,8 @@ class ProjectsResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('Name')
+                    ->maxLength(45),
             ]);
     }
 
@@ -31,7 +32,16 @@ class ProjectsResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('Name')
+                    ->searchable(),
             ])
             ->filters([
                 //
