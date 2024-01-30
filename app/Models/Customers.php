@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customers extends Model
 {
+    protected $fillable = [
+        // other attributes you've already made fillable
+        'CompanyName',
+        // ...
+    ];
     use HasFactory;
 }
