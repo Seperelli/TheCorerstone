@@ -9,7 +9,7 @@ class Customers extends Model
 {
     protected $fillable = [
         // other attributes you've already made fillable
-        'CompanyName',
+        'CompanyName','Town'
         // ...
     ];
     use HasFactory;
