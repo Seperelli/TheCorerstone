@@ -27,6 +27,8 @@ class ProjectsResource extends Resource
                     ->maxLength(45),
                 Forms\Components\TextInput::make('Customer')
                     ->numeric(),
+                BelongsToSelect::make('Customers_id')
+                    ->relationship('Customers', 'Customer'),
             ]);
     }
 
