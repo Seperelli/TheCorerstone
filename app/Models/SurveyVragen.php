@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class SurveyVragen extends Model
 {
+    protected $fillable = [
+        // other attributes you've already made fillable
+        'Question','SGroup'
+        // ...
+    ];
     use HasFactory;
 }
