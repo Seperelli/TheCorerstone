@@ -25,11 +25,13 @@ class CustomersResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('CompanyName')
                     ->maxLength(45),
-                Forms\Components\TextInput::make('Town')
-                    ->maxLength(45),
                 Forms\Components\TextInput::make('Street')
                     ->maxLength(45),
                 Forms\Components\TextInput::make('Number')
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('postcode')
+                    ->maxLength(45),
+                Forms\Components\TextInput::make('Town')
                     ->maxLength(45),
                 Forms\Components\TextInput::make('Mail')
                     ->maxLength(45),
@@ -37,6 +39,9 @@ class CustomersResource extends Resource
                     ->maxLength(45),
                 Forms\Components\TextInput::make('Contact')
                     ->maxLength(45),
+                Forms\Components\TextInput::make('BTW')
+                    ->maxLength(45),
+
             ]);
     }
 
@@ -54,6 +59,8 @@ class CustomersResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('CompanyName')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('postcode')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('Town')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Street')
@@ -66,6 +73,9 @@ class CustomersResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('Contact')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('BTW')
+                    ->searchable(),
+
             ])
             ->filters([
                 //

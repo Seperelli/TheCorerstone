@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProjectsResource\Pages;
-use App\Filament\Resources\ProjectsResource\RelationManagers;
-use App\Models\Projects;
+use App\Filament\Resources\SurveyVragenResource\Pages;
+use App\Filament\Resources\SurveyVragenResource\RelationManagers;
+use App\Models\SurveyVragen;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,20 +13,21 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ProjectsResource extends Resource
+class SurveyVragenResource extends Resource
 {
-    protected static ?string $model = Projects::class;
+    protected static ?string $model = SurveyVragen::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    Protected static ?string $navigationGroup = 'Surveys';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('Name')
+                Forms\Components\TextInput::make('Question')
+                    ->maxLength(500),
+                Forms\Components\TextInput::make('SGroup')
                     ->maxLength(45),
-                Forms\Components\TextInput::make('Customer')
-                    ->numeric(),
             ]);
     }
 
@@ -42,11 +43,10 @@ class ProjectsResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('Name')
+                Tables\Columns\TextColumn::make('Question')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('Customer')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('SGroup')
+                    ->searchable(),
             ])
             ->filters([
                 //
@@ -71,9 +71,9 @@ class ProjectsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProjects::route('/'),
-            'create' => Pages\CreateProjects::route('/create'),
-            'edit' => Pages\EditProjects::route('/{record}/edit'),
+            'index' => Pages\ListSurveyVragens::route('/'),
+            'create' => Pages\CreateSurveyVragen::route('/create'),
+            'edit' => Pages\EditSurveyVragen::route('/{record}/edit'),
         ];
     }
 }

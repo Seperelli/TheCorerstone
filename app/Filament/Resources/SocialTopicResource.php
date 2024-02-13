@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProjectsResource\Pages;
-use App\Filament\Resources\ProjectsResource\RelationManagers;
-use App\Models\Projects;
+use App\Filament\Resources\SocialTopicResource\Pages;
+use App\Filament\Resources\SocialTopicResource\RelationManagers;
+use App\Models\SocialTopic;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,20 +13,20 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ProjectsResource extends Resource
+class SocialTopicResource extends Resource
 {
-    protected static ?string $model = Projects::class;
+    protected static ?string $model = SocialTopic::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    Protected static ?string $navigationGroup = 'Framework';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('Name')
+                Forms\Components\TextInput::make('description')
                     ->maxLength(45),
-                Forms\Components\TextInput::make('Customer')
-                    ->numeric(),
             ]);
     }
 
@@ -42,11 +42,8 @@ class ProjectsResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('Name')
+                Tables\Columns\TextColumn::make('description')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('Customer')
-                    ->numeric()
-                    ->sortable(),
             ])
             ->filters([
                 //
@@ -71,9 +68,9 @@ class ProjectsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProjects::route('/'),
-            'create' => Pages\CreateProjects::route('/create'),
-            'edit' => Pages\EditProjects::route('/{record}/edit'),
+            'index' => Pages\ListSocialTopics::route('/'),
+            'create' => Pages\CreateSocialTopic::route('/create'),
+            'edit' => Pages\EditSocialTopic::route('/{record}/edit'),
         ];
     }
 }
