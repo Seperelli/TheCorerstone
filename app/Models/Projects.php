@@ -16,7 +16,7 @@ class Projects extends Model
     ];
     public function customer(): BelongsTo
     {
-        return $this->belongsTo(Customers::class);
+        return $this->belongsTo(Customers::class, 'Customer');
     }
     use HasFactory;
 }

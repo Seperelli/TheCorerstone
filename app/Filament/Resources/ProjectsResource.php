@@ -25,8 +25,10 @@ class ProjectsResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('Name')
                     ->maxLength(45),
-                Forms\Components\TextInput::make('Customer')
-                    ->numeric(),
+                Forms\Components\Select::make('customer_id')
+                    ->label('Customer')
+                    ->options(\App\Models\Customers::all()->pluck('CompanyName', 'id'))
+                    ->searchable(),
             ]);
     }
 
@@ -44,9 +46,10 @@ class ProjectsResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('Name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('Customer')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('customers.CompanyName')
+                    ->label('Customer Name')
+                    ->sortable() // if you want to make it sortable
+                    ->searchable(), // this enables searching by the customer's name
             ])
             ->filters([
                 //
